@@ -1,0 +1,57 @@
+<div class="min-h-screen max-w-7xl mx-auto pt-16 px-6 lg:px-0">
+  <div
+    *ngIf="movie"
+    class="flex flex-col lg:flex-row justify-between items-center mt-5 lg:mx-20 lg:mt-16 space-y-14 lg:p-10 lg:px-20"
+  >
+    <div>
+      <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+    </div>
+    <div class="flex justify-center items-center">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Movie Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Title</td>
+            <td>{{ movie.Title }}</td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>{{ movie.Year }}</td>
+          </tr>
+          <tr>
+            <td>IMDb Rating</td>
+            <td>{{ movie.imdbRating }}</td>
+          </tr>
+          <tr>
+            <td>Genre</td>
+            <td>{{ movie.Genre }}</td>
+          </tr>
+          <tr>
+            <td>Director</td>
+            <td>{{ movie.Director }}</td>
+          </tr>
+          <tr>
+            <td>Actors</td>
+            <td>{{ movie.Actors }}</td>
+          </tr>
+          <tr>
+            <td>Awards</td>
+            <td>{{ movie.Awards }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="flex justify-center items-center py-10 space-x-7 lg:space-x-32">
+    <button class="movie-btn" routerLink="/home">Go Back</button>
+    <a [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">
+      <button class="movie-btn">
+        IMDb <mat-icon>open_in_browser</mat-icon>
+      </button>
+    </a>
+  </div>
+</div>

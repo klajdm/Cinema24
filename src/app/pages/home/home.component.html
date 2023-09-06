@@ -1,0 +1,74 @@
+<div
+  class="min-h-screen max-w-7xl mx-auto pt-16 px-6"
+  [class.home-container]="!searchExecuted"
+>
+  <div class="w-full flex justify-center items-center my-5 space-x-5">
+    <input
+      type="text"
+      [(ngModel)]="term"
+      name="query"
+      (input)="getMovies()"
+      placeholder="Search for a movie..."
+      class="p-2 w-[300px] text-base bg-transparent outline-none focus:bg-[#cdc2dc]/20 rounded-md border border-[#cdc2dc]/20 focus:text-white"
+    />
+    <div>
+      <select
+        class="bg-transparent text-white p-1 border border-[#cdc2dc]/20 rounded-lg"
+        id="limitSelect"
+        [(ngModel)]="limit"
+        (change)="onLimitChange()"
+      >
+        <option class="text-black" value="3">3</option>
+        <option class="text-black" value="10">10</option>
+        <option class="text-black" value="20">20</option>
+      </select>
+    </div>
+  </div>
+
+  <div
+    *ngIf="movies && movies.length > 0"
+    class="grid grid-cols-2 gap-10 md:grid-cols-3 mb-10"
+  >
+    <div
+      *ngFor="let movie of movies"
+      class="flex justify-center w-fit mx-auto mb-10"
+    >
+      <div
+        class="w-[150px] h-[227px] md:w-[190px] md:h-[288px] lg:w-[220px] lg:h-[333px] relative mb-9"
+      >
+        <div
+          class="w-full h-full shadow-lg rounded-sm hover:scale-105 duration-200"
+        >
+          <a
+            [href]="'https://www.imdb.com/title/' + movie.imdbID"
+            target="_blank"
+          >
+            <img
+              [src]="movie.Poster"
+              alt="{{ movie.Title }}"
+              class="w-full h-full object-cover rounded-sm"
+            />
+          </a>
+        </div>
+
+        <div class="text-center">
+          <h5 class="py-2 text-white truncate">
+            {{ movie.Title }} {{ "  " }} ({{ movie.Year }})
+          </h5>
+          <button
+            [routerLink]="['/movie/', movie.imdbID]"
+            class="w-full py-2 bg-[#cdc2dc] rounded-sm"
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="searchExecuted && (!movies || movies.length === 0)"
+    class="flex justify-center items-center mt-14"
+  >
+    <h3 class="text-4xl text-white">No results found.</h3>
+  </div>
+</div>
