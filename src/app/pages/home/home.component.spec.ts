@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HomeComponent } from './home.component';
+import { MovieService } from 'src/app/services/movie.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +9,9 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent]
+      imports: [HttpClientTestingModule],
+      providers: [MovieService],
+      declarations: [HomeComponent],
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
