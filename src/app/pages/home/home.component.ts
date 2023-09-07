@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       return;
     } else {
       this.movieService.searchMovies(this.term).subscribe((data: any) => {
-        console.log(data);
         if (Array.isArray(data.Search)) {
           this.movies = data.Search.slice(0, this.limit).map((item: any) => ({
             Poster: item.Poster,
