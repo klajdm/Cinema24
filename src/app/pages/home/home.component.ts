@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   term = '';
@@ -15,7 +14,25 @@ export class HomeComponent implements OnInit {
 
   constructor(private movieService: MovieService) {}
 
-  ngOnInit(): void {}
+  InitialMovies() {
+    this.movieService.searchMovies('2023').subscribe((data: any) => {
+      if (Array.isArray(data.Search)) {
+        this.movies = data.Search.map((item: any) => ({
+          Poster: item.Poster,
+          Title: item.Title,
+          Type: item.Type,
+          Year: parseInt(item.Year),
+          imdbID: item.imdbID,
+        }));
+      } else {
+        this.movies = [];
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.InitialMovies();
+  }
 
   getMovies() {
     if (this.term.trim() === '') {

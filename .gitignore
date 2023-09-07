@@ -20,9 +20,9 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
-# Ignore environment files
-src/environments/environment.ts
-src/environments/environment.prod.ts
+# # Ignore environment files
+# src/environments/environment.ts
+# src/environments/environment.prod.ts
 
 # Visual Studio Code
 .vscode/*

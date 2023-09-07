@@ -9,13 +9,14 @@
 
 body {
   background-color: #1c1a26;
+  background-image: url("./assets/bg.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 html,
 body {
   height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

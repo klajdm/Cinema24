@@ -1,7 +1,4 @@
-<div
-  class="min-h-screen max-w-7xl mx-auto pt-16 px-6"
-  [class.home-container]="!searchExecuted"
->
+<div class="min-h-screen max-w-7xl mx-auto pt-16 px-6">
   <div class="w-full flex justify-center items-center my-5 space-x-5">
     <input
       type="text"
@@ -12,22 +9,25 @@
       class="p-2 w-[300px] text-base bg-transparent outline-none focus:bg-[#cdc2dc]/20 rounded-md border border-[#cdc2dc]/20 focus:text-white"
     />
     <div>
+      <!-- Dropdown menu  -->
+
       <select
-        class="bg-transparent text-white p-1 border border-[#cdc2dc]/20 rounded-lg"
+        class="bg-transparent outline-none text-white p-1 border border-[#cdc2dc]/20 rounded-lg"
         id="limitSelect"
         [(ngModel)]="limit"
         (change)="onLimitChange()"
       >
         <option class="text-black" value="3">3</option>
         <option class="text-black" value="10">10</option>
-        <option class="text-black" value="20">20</option>
       </select>
     </div>
   </div>
 
+  <!-- Grid container -->
+
   <div
     *ngIf="movies && movies.length > 0"
-    class="grid grid-cols-2 gap-10 md:grid-cols-3 mb-10"
+    class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 my-10"
   >
     <div
       *ngFor="let movie of movies"
@@ -39,10 +39,7 @@
         <div
           class="w-full h-full shadow-lg rounded-sm hover:scale-105 duration-200"
         >
-          <a
-            [href]="'https://www.imdb.com/title/' + movie.imdbID"
-            target="_blank"
-          >
+          <a [routerLink]="['/movie/', movie.imdbID]">
             <img
               [src]="movie.Poster"
               alt="{{ movie.Title }}"
@@ -55,20 +52,16 @@
           <h5 class="py-2 text-white truncate">
             {{ movie.Title }} {{ "  " }} ({{ movie.Year }})
           </h5>
-          <button
-            [routerLink]="['/movie/', movie.imdbID]"
-            class="w-full py-2 bg-[#cdc2dc] rounded-sm"
-          >
-            View Details
-          </button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- If no results were found, display the container.  -->
   <div
     *ngIf="searchExecuted && (!movies || movies.length === 0)"
-    class="flex justify-center items-center mt-14"
+    class="flex justify-center items-center mt-20"
   >
-    <h3 class="text-4xl text-white">No results found.</h3>
+    <h3 class="text-3xl text-white">No results found.</h3>
   </div>
 </div>

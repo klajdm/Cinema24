@@ -15,7 +15,9 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'movie/:id', component: MovieComponent },
+
   // Wildcard route for handling 404 errors
+
   { path: '**', component: Error404Component },
 ];
 

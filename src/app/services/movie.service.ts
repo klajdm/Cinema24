@@ -13,6 +13,8 @@ export class MovieService {
 
   constructor(private httpClient: HttpClient) {}
 
+  // Method to retrieve the movies by search
+
   searchMovies(query: string): Observable<Array<Movie>> {
     if (query === '') {
       return of([]);
@@ -21,6 +23,8 @@ export class MovieService {
       `${this.movieUrl}?apikey=${this.apiKey}&s=${query}`
     );
   }
+
+  // Method to retrieve the movies by ID
 
   searchMoviesById(imdbID: string): Observable<any> {
     const url = `${this.movieUrl}?apikey=${this.apiKey}&i=${imdbID}`;

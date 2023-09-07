@@ -22,7 +22,6 @@ export class MovieComponent implements OnInit {
       if (imdbID) {
         this.movieService.searchMoviesById(imdbID).subscribe((data: any) => {
           this.movie = data;
-          console.log(data);
         });
       }
     });

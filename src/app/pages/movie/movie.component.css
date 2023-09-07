@@ -1,18 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  .movie-btn {
-    @apply flex justify-center items-center py-3 px-10 lg:py-4 lg:px-14 bg-[#D0BCFF] rounded-xl;
-  }
-}
+/* Table design */
 
 td {
   border: 1px solid #d0bcff;
   color: #fff;
   padding: 10px 10px;
   text-align: center;
+  align-items: center;
+  vertical-align: middle;
 }
 
 thead {
