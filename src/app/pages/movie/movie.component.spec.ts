@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieComponent } from './movie.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('MovieComponent', () => {
   let component: MovieComponent;
@@ -8,6 +9,8 @@ describe('MovieComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule],
+      providers: [],
       declarations: [MovieComponent],
     });
     fixture = TestBed.createComponent(MovieComponent);
