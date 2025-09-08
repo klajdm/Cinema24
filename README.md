@@ -131,13 +131,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Klajdi Murataj**
 - GitHub: [@klajdm](https://github.com/klajdm)
 
-## 🙏 Acknowledgments
-
-- [OMDB API](http://www.omdbapi.com/) for providing movie data
-- [Angular](https://angular.io/) for the amazing framework
-- [Angular Material](https://material.angular.io/) for UI components
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
-
-## 📞 Support
 
 If you like this project, please consider giving it a ⭐ on GitHub!
