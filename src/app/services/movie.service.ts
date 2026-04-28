@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { Movie } from '../models/movie.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -11,23 +10,31 @@ export class MovieService {
   private movieUrl = 'https://www.omdbapi.com/';
   private apiKey = environment.apiKey;
 
+  readonly featuredQueries: { label: string; query: string }[] = [
+    { label: 'Trending', query: 'marvel' },
+    { label: 'Sci-Fi', query: 'space' },
+    { label: 'Action', query: 'mission' },
+    { label: 'Drama', query: 'drama' },
+  ];
+
   constructor(private httpClient: HttpClient) {}
 
-  // Method to retrieve the movies by search
-
-  searchMovies(query: string): Observable<Array<Movie>> {
-    if (query === '') {
-      return of([]);
+  searchMovies(
+    query: string,
+    type: string = '',
+    page: number = 1,
+  ): Observable<any> {
+    if (query.trim() === '') {
+      return of({ Search: [], totalResults: '0' });
     }
-    return this.httpClient.get<Array<Movie>>(
-      `${this.movieUrl}?apikey=${this.apiKey}&s=${query}`
+    const typeParam = type && type !== 'all' ? `&type=${type}` : '';
+    return this.httpClient.get<any>(
+      `${this.movieUrl}?apikey=${this.apiKey}&s=${encodeURIComponent(query)}${typeParam}&page=${page}`,
     );
   }
 
-  // Method to retrieve the movies by ID
-
   searchMoviesById(imdbID: string): Observable<any> {
-    const url = `${this.movieUrl}?apikey=${this.apiKey}&i=${imdbID}`;
+    const url = `${this.movieUrl}?apikey=${this.apiKey}&i=${imdbID}&plot=full`;
     return this.httpClient.get(url);
   }
 }

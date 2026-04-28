@@ -1,74 +1,256 @@
-<div class="min-h-screen max-w-7xl mx-auto pt-16 px-6 lg:px-0">
+<div class="min-h-screen">
+  <!-- Loading skeleton -->
   <div
-    *ngIf="movie"
-    class="flex flex-col lg:flex-row justify-between items-center mt-5 lg:mx-20 lg:mt-16 space-y-14 lg:p-10 lg:px-20"
+    *ngIf="loading"
+    class="pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
   >
-    <!-- Display poster -->
-
-    <div>
-      <img [src]="movie.Poster" alt="{{ movie.Title }}" class="w-full h-full" />
-    </div>
-
-    <!-- Table for displaying move details -->
-
-    <div class="flex justify-center items-center">
-      <table>
-        <thead>
-          <tr>
-            <th colspan="2">Movie Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Title</td>
-            <td>{{ movie.Title }}</td>
-          </tr>
-          <tr>
-            <td>Year</td>
-            <td>{{ movie.Year }}</td>
-          </tr>
-          <tr>
-            <td>IMDb Rating</td>
-            <td>
-              <mat-icon class="text-yellow-300 pt-1 mr-1">star</mat-icon>
-              {{ movie.imdbRating }}
-            </td>
-          </tr>
-          <tr>
-            <td>Genre</td>
-            <td>{{ movie.Genre }}</td>
-          </tr>
-          <tr>
-            <td>Director</td>
-            <td>{{ movie.Director }}</td>
-          </tr>
-          <tr>
-            <td>Actors</td>
-            <td>{{ movie.Actors }}</td>
-          </tr>
-          <tr>
-            <td>Awards</td>
-            <td>{{ movie.Awards }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="flex flex-col lg:flex-row gap-10 animate-pulse">
+      <div
+        class="w-full lg:w-[280px] shrink-0 rounded-2xl bg-cinema-surface aspect-[2/3]"
+      ></div>
+      <div class="flex-1 space-y-4 pt-4">
+        <div class="h-8 bg-cinema-surface rounded-xl w-3/4"></div>
+        <div class="h-4 bg-cinema-surface rounded w-1/3"></div>
+        <div class="flex gap-2">
+          <div class="h-6 bg-cinema-surface rounded-full w-20"></div>
+          <div class="h-6 bg-cinema-surface rounded-full w-16"></div>
+          <div class="h-6 bg-cinema-surface rounded-full w-24"></div>
+        </div>
+        <div class="space-y-2 pt-4">
+          <div class="h-3 bg-cinema-surface rounded w-full"></div>
+          <div class="h-3 bg-cinema-surface rounded w-5/6"></div>
+          <div class="h-3 bg-cinema-surface rounded w-4/6"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="flex justify-center items-center my-10 space-x-7 lg:space-x-32">
-    <button
-      class="flex justify-center items-center py-3 px-10 lg:px-12 bg-[#D0BCFF] rounded-xl hover:bg-transparent transition-all duration-300 hover:text-white border border-[#D0BCFF]"
-      routerLink="/home"
-    >
-      Go Back
-    </button>
+  <!-- Main content -->
+  <div *ngIf="!loading && movie" class="animate-fade-in">
+    <!-- Backdrop hero -->
+    <div class="relative w-full h-[320px] lg:h-[420px] overflow-hidden">
+      <img
+        [src]="getPosterUrl(movie.Poster)"
+        [alt]="movie.Title"
+        class="w-full h-full object-cover object-top scale-110 blur-md brightness-30"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-cinema-darker/60 via-cinema-dark/70 to-cinema-dark"
+      ></div>
+    </div>
 
-    <a [href]="'https://www.imdb.com/title/' + movie?.imdbID" target="_blank">
-      <button
-        class="flex justify-center items-center py-3 px-10 lg:px-12 bg-[#D0BCFF] rounded-xl hover:bg-transparent transition-all duration-300 hover:text-white border border-[#D0BCFF]"
-      >
-        IMDb <mat-icon>open_in_browser</mat-icon>
-      </button>
-    </a>
+    <!-- Content card -->
+    <div
+      class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-48 lg:-mt-64 relative z-10 pb-16"
+    >
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Poster -->
+        <div class="shrink-0 mx-auto lg:mx-0">
+          <div
+            class="w-[180px] lg:w-[240px] rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white/10"
+          >
+            <img
+              [src]="getPosterUrl(movie.Poster)"
+              [alt]="movie.Title"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Details panel -->
+        <div class="flex-1">
+          <!-- Title row -->
+          <div class="flex flex-wrap items-start gap-3 mb-3">
+            <h1
+              class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight"
+            >
+              {{ movie.Title }}
+            </h1>
+            <span
+              *ngIf="movie.Type"
+              class="mt-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-cinema-purple text-cinema-darker"
+            >
+              {{ movie.Type }}
+            </span>
+          </div>
+
+          <!-- Meta row -->
+          <div
+            class="flex flex-wrap items-center gap-x-4 gap-y-1 text-cinema-purple-dim/70 text-sm mb-4"
+          >
+            <span *ngIf="movie.Year">{{ movie.Year }}</span>
+            <span
+              *ngIf="movie.Runtime && movie.Runtime !== 'N/A'"
+              class="flex items-center gap-1"
+            >
+              <mat-icon class="text-[14px] leading-none">schedule</mat-icon
+              >{{ movie.Runtime }}
+            </span>
+            <span
+              *ngIf="movie.Language && movie.Language !== 'N/A'"
+              class="flex items-center gap-1"
+            >
+              <mat-icon class="text-[14px] leading-none">language</mat-icon
+              >{{ movie.Language?.split(",")[0] }}
+            </span>
+            <span
+              *ngIf="movie.Country && movie.Country !== 'N/A'"
+              class="flex items-center gap-1"
+            >
+              <mat-icon class="text-[14px] leading-none">flag</mat-icon
+              >{{ movie.Country?.split(",")[0] }}
+            </span>
+          </div>
+
+          <!-- IMDb rating -->
+          <div
+            *ngIf="movie.imdbRating && movie.imdbRating !== 'N/A'"
+            class="flex items-center gap-2 mb-4"
+          >
+            <mat-icon class="text-yellow-400 text-[22px]">star</mat-icon>
+            <span class="text-white font-bold text-xl">{{
+              movie.imdbRating
+            }}</span>
+            <span class="text-cinema-purple-dim/60 text-sm">/10 · IMDb</span>
+          </div>
+
+          <!-- Genre pills -->
+          <div *ngIf="getGenres().length > 0" class="flex flex-wrap gap-2 mb-5">
+            <span
+              *ngFor="let genre of getGenres()"
+              class="px-3 py-1 rounded-full text-xs font-medium bg-cinema-surface border border-white/10 text-cinema-purple-dim hover:border-cinema-purple/50 transition-colors duration-200"
+              >{{ genre }}</span
+            >
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-wrap gap-3 mb-6">
+            <button
+              (click)="toggleWatchlist()"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
+              [class.bg-cinema-accent]="isInWatchlist"
+              [class.text-cinema-darker]="isInWatchlist"
+              [class.hover:opacity-90]="isInWatchlist"
+              [class.bg-cinema-surface]="!isInWatchlist"
+              [class.text-white]="!isInWatchlist"
+              [class.border]="!isInWatchlist"
+              [class.border-white]="!isInWatchlist"
+              [class.border-opacity-10]="!isInWatchlist"
+              [class.hover:border-cinema-purple]="!isInWatchlist"
+              [class.hover:text-cinema-purple]="!isInWatchlist"
+            >
+              <mat-icon class="text-[18px] leading-none">{{
+                isInWatchlist ? "bookmark" : "bookmark_border"
+              }}</mat-icon>
+              {{ isInWatchlist ? "In Watchlist" : "Add to Watchlist" }}
+            </button>
+
+            <a
+              [href]="'https://www.imdb.com/title/' + movie.imdbID"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-yellow-500 text-black hover:bg-yellow-400 transition-all duration-200"
+            >
+              <mat-icon class="text-[18px] leading-none">open_in_new</mat-icon>
+              IMDb
+            </a>
+
+            <button
+              routerLink="/home"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-cinema-surface text-cinema-purple-dim border border-white/10 hover:border-cinema-purple/50 hover:text-white transition-all duration-200"
+            >
+              <mat-icon class="text-[18px] leading-none">arrow_back</mat-icon>
+              Back
+            </button>
+          </div>
+
+          <!-- Plot -->
+          <div *ngIf="movie.Plot && movie.Plot !== 'N/A'" class="mb-6">
+            <h3
+              class="text-xs font-semibold uppercase tracking-wider text-cinema-purple-dim/50 mb-2"
+            >
+              Plot
+            </h3>
+            <p
+              class="text-cinema-purple-dim leading-relaxed text-sm"
+              [class.line-clamp-3]="!plotExpanded"
+            >
+              {{ movie.Plot }}
+            </p>
+            <button
+              *ngIf="movie.Plot.length > 200"
+              (click)="plotExpanded = !plotExpanded"
+              class="mt-1 text-cinema-purple text-xs font-medium hover:underline"
+            >
+              {{ plotExpanded ? "Show less" : "Read more" }}
+            </button>
+          </div>
+
+          <!-- Info grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div
+              *ngIf="movie.Director && movie.Director !== 'N/A'"
+              class="bg-cinema-surface/60 rounded-xl p-3.5 border border-white/5"
+            >
+              <p
+                class="text-[10px] font-semibold uppercase tracking-wider text-cinema-purple-dim/40 mb-1"
+              >
+                Director
+              </p>
+              <p class="text-white text-sm font-medium">{{ movie.Director }}</p>
+            </div>
+            <div
+              *ngIf="movie.Actors && movie.Actors !== 'N/A'"
+              class="bg-cinema-surface/60 rounded-xl p-3.5 border border-white/5"
+            >
+              <p
+                class="text-[10px] font-semibold uppercase tracking-wider text-cinema-purple-dim/40 mb-1"
+              >
+                Cast
+              </p>
+              <p class="text-white text-sm font-medium">{{ movie.Actors }}</p>
+            </div>
+            <div
+              *ngIf="movie.Awards && movie.Awards !== 'N/A'"
+              class="bg-cinema-surface/60 rounded-xl p-3.5 border border-white/5 sm:col-span-2"
+            >
+              <p
+                class="text-[10px] font-semibold uppercase tracking-wider text-cinema-purple-dim/40 mb-1"
+              >
+                Awards
+              </p>
+              <p class="text-white text-sm font-medium">{{ movie.Awards }}</p>
+            </div>
+          </div>
+
+          <!-- All Ratings -->
+          <div *ngIf="movie.Ratings && movie.Ratings.length > 0">
+            <h3
+              class="text-xs font-semibold uppercase tracking-wider text-cinema-purple-dim/50 mb-3"
+            >
+              Ratings
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <div
+                *ngFor="let rating of movie.Ratings"
+                class="flex items-center gap-2 bg-cinema-surface/60 rounded-xl px-4 py-2.5 border border-white/5"
+              >
+                <mat-icon class="text-[16px] text-cinema-purple leading-none">{{
+                  getRatingSource(rating.Source)
+                }}</mat-icon>
+                <div>
+                  <p class="text-white text-sm font-bold leading-none">
+                    {{ rating.Value }}
+                  </p>
+                  <p class="text-cinema-purple-dim/50 text-[10px] mt-0.5">
+                    {{ rating.Source }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
