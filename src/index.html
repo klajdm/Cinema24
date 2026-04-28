@@ -1,15 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <!-- ─── Character set & viewport ──────────────────────────────────── -->
     <meta charset="utf-8" />
-    <title>Cinema24</title>
-    <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/" />
+
+    <!-- ─── Primary SEO ───────────────────────────────────────────────── -->
+    <title>Cinema24 - Discover Movies & Series</title>
+    <meta
+      name="description"
+      content="Cinema24 - Search, discover, and save your favorite movies and series. Powered by OMDB with debounced search, type filters, watchlist, and detailed movie pages."
+    />
+    <meta
+      name="keywords"
+      content="cinema, movies, series, movie search, watchlist, OMDB, film database, Angular, movie details, IMDb"
+    />
+    <meta name="author" content="Klajdi Murataj" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://cinema24.vercel.app/" />
+
+    <!-- ─── Open Graph (Facebook / LinkedIn / Discord previews) ───────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cinema24" />
+    <meta property="og:title" content="Cinema24 - Discover Movies & Series" />
+    <meta
+      property="og:description"
+      content="Search millions of movies and series, explore curated categories, and build your personal watchlist - all powered by OMDB."
+    />
+    <meta property="og:url" content="https://cinema24.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://cinema24.vercel.app/assets/Cinema24logo.png"
+    />
+    <meta property="og:image:alt" content="Cinema24 logo" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ─── Twitter / X Card ─────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cinema24 - Discover Movies & Series" />
+    <meta
+      name="twitter:description"
+      content="Search millions of movies and series, explore curated categories, and build your personal watchlist - all powered by OMDB."
+    />
+    <meta
+      name="twitter:image"
+      content="https://cinema24.vercel.app/assets/Cinema24logo.png"
+    />
+    <meta name="twitter:image:alt" content="Cinema24 logo" />
+
+    <!-- ─── Theme & app appearance ────────────────────────────────────── -->
+    <meta name="theme-color" content="#1c1a26" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="application-name" content="Cinema24" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Cinema24" />
+
+    <!-- ─── Security headers (HTTP-equiv) ────────────────────────────── -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta
+      http-equiv="Referrer-Policy"
+      content="strict-origin-when-cross-origin"
+    />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=()"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https: http:;
+        connect-src 'self' https://www.omdbapi.com;
+        frame-ancestors 'self';
+        base-uri 'self';
+        form-action 'self';
+      "
+    />
+
+    <!-- ─── Favicon & icons ───────────────────────────────────────────── -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+    <link rel="apple-touch-icon" href="assets/Cinema24logo.png" />
+
+    <!-- ─── Fonts ─────────────────────────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- ─── Structured data (JSON-LD) ────────────────────────────────── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Cinema24",
+        "url": "https://cinema24.vercel.app/",
+        "description": "Search, discover, and save your favorite movies and series powered by OMDB.",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Any",
+        "author": {
+          "@type": "Person",
+          "name": "Klajdi Murataj",
+          "url": "https://klajdimurataj.dev/"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </head>
   <body class="mat-typography">
     <app-root></app-root>
   </body>
