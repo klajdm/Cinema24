@@ -1,21 +1,3 @@
-/* Table design */
-
-td {
-  border: 1px solid #d0bcff;
-  color: #fff;
-  padding: 10px 10px;
-  text-align: center;
-  align-items: center;
-  vertical-align: middle;
-}
-
-thead {
-  background-color: #d0bcff;
-  border: 1px solid #d0bcff;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-th {
-  padding: 10px 0;
+.brightness-30 {
+  filter: brightness(0.3);
 }

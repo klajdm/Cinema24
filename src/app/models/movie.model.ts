@@ -3,5 +3,15 @@ export interface Movie {
   Title: string;
   Type: string;
   Year: number;
-  imbdID: string;
+  imdbID: string;
+  imdbRating?: string;
+  Genre?: string;
+  Director?: string;
+  Actors?: string;
+  Awards?: string;
+  Plot?: string;
+  Runtime?: string;
+  Language?: string;
+  Country?: string;
+  Ratings?: { Source: string; Value: string }[];
 }

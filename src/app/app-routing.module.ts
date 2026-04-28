@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MovieComponent } from './pages/movie/movie.component';
+import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { Error404Component } from './pages/error404/error404.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'movie/:id', component: MovieComponent },
+  { path: 'watchlist', component: WatchlistComponent },
 
   // Wildcard route for handling 404 errors
 
@@ -22,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,0 +1,90 @@
+<div class="min-h-screen pt-16">
+
+  <!-- Page Header -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 rounded-xl bg-cinema-purple/20 flex items-center justify-center">
+        <mat-icon class="text-cinema-purple text-[22px]">bookmark</mat-icon>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-white">My Watchlist</h1>
+      <span *ngIf="movies.length > 0" class="px-2.5 py-0.5 rounded-full bg-cinema-surface text-cinema-purple-dim text-sm font-medium border border-white/10">
+        {{ movies.length }}
+      </span>
+    </div>
+    <p class="text-cinema-purple-dim/60 text-sm ml-[52px]">Movies and series you've saved for later.</p>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+
+    <!-- Movie grid -->
+    <div
+      *ngIf="movies.length > 0"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 animate-fade-in"
+    >
+      <div *ngFor="let movie of movies" class="group relative">
+        <a [routerLink]="['/movie/', movie.imdbID]" class="block">
+          <div class="relative rounded-xl overflow-hidden aspect-[2/3] bg-cinema-card shadow-lg ring-1 ring-white/5 transition-all duration-300 group-hover:ring-cinema-purple/40 group-hover:shadow-cinema-purple/20 group-hover:shadow-xl">
+            <img
+              [src]="getPosterUrl(movie.Poster)"
+              [alt]="movie.Title"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <!-- Overlay on hover -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+              <span class="inline-flex items-center self-start px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-2"
+                [class.bg-cinema-purple]="movie.Type === 'movie'"
+                [class.text-cinema-darker]="movie.Type === 'movie'"
+                [class.bg-cinema-accent]="movie.Type !== 'movie'"
+                [class.text-cinema-darker]="movie.Type !== 'movie'"
+              >{{ movie.Type }}</span>
+              <p class="text-white text-xs font-semibold leading-tight line-clamp-2">{{ movie.Title }}</p>
+              <p class="text-cinema-purple-dim/80 text-[11px] mt-0.5">{{ movie.Year }}</p>
+              <div class="mt-2 flex items-center gap-1 text-[11px] text-cinema-purple font-medium">
+                <mat-icon class="text-[13px] leading-none">play_circle</mat-icon>
+                View Details
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Remove button -->
+        <button
+          (click)="remove(movie.imdbID)"
+          matTooltip="Remove from Watchlist"
+          class="absolute top-2 right-2 w-8 h-8 rounded-full bg-cinema-accent text-cinema-darker flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 hover:scale-110"
+        >
+          <mat-icon class="text-[16px] leading-none">close</mat-icon>
+        </button>
+
+        <!-- Title below card -->
+        <div class="mt-2 px-0.5">
+          <p class="text-white text-xs font-medium truncate">{{ movie.Title }}</p>
+          <p class="text-cinema-purple-dim/60 text-[11px]">{{ movie.Year }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div
+      *ngIf="movies.length === 0"
+      class="flex flex-col items-center justify-center py-28 animate-fade-in"
+    >
+      <div class="w-24 h-24 rounded-full bg-cinema-surface flex items-center justify-center mb-6 ring-1 ring-white/5">
+        <mat-icon class="text-cinema-purple-dim/40" style="font-size:48px;width:48px;height:48px;">bookmark_border</mat-icon>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-2">Your watchlist is empty</h3>
+      <p class="text-cinema-purple-dim/60 text-sm text-center max-w-sm mb-6">
+        Browse movies and series, then click the bookmark icon to save them here.
+      </p>
+      <a
+        routerLink="/home"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-cinema-purple text-cinema-darker rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity duration-200"
+      >
+        <mat-icon class="text-[18px] leading-none">movie</mat-icon>
+        Browse Movies
+      </a>
+    </div>
+
+  </div>
+</div>

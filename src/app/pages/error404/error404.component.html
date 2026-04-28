@@ -1,11 +1,30 @@
 <div
-  class="min-h-screen max-w-7xl flex justify-center items-center mx-auto pt-16 px-6 lg:px-0"
+  class="min-h-screen flex flex-col justify-center items-center px-4 pt-16 text-center"
 >
-  <div>
-    <h1 class="glitch text-[2rem] lg:text-[5rem]">
-      <span aria-hidden="true">Error 404</span>
-      Error 404
-      <span aria-hidden="true">Error 404</span>
-    </h1>
+  <h1 class="glitch text-[2.5rem] lg:text-[6rem] mb-2">
+    <span aria-hidden="true">Error 404</span>
+    Error 404
+    <span aria-hidden="true">Error 404</span>
+  </h1>
+
+  <p class="text-cinema-purple-dim/60 text-base sm:text-lg max-w-md mt-6 mb-8">
+    The page you're looking for doesn't exist or was moved.
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-3">
+    <a
+      routerLink="/home"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-cinema-purple text-cinema-darker rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity duration-200"
+    >
+      <mat-icon class="text-[18px] leading-none">home</mat-icon>
+      Go Home
+    </a>
+    <a
+      routerLink="/watchlist"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-cinema-surface text-cinema-purple-dim border border-white/10 rounded-xl font-semibold text-sm hover:border-cinema-purple/50 hover:text-white transition-all duration-200"
+    >
+      <mat-icon class="text-[18px] leading-none">bookmark</mat-icon>
+      My Watchlist
+    </a>
   </div>
 </div>

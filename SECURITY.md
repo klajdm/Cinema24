@@ -2,11 +2,10 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.0.x   | ✅ |
+| Version | Supported |
+| ------- | --------- |
+| 2.0.x   | ✅        |
+| 1.x.x   | ❌ (EOL)  |
 
 ## Reporting a Vulnerability
 
@@ -15,7 +14,7 @@ We take the security of Cinema24 seriously. If you discover a security vulnerabi
 ### How to Report
 
 1. **Do NOT** open a public issue for security vulnerabilities
-2. Send an email to the maintainer directly via GitHub
+2. Send an email to the maintainer: **klajdimurataj@gmail.com**
 3. Include detailed information about the vulnerability
 4. Provide steps to reproduce the issue if possible
 
@@ -40,10 +39,12 @@ Please provide the following information:
 
 This security policy applies to the following components:
 
-- Cinema24 web application
-- API integrations (OMDB API usage)
+- Cinema24 web application (client-side Angular app)
+- OMDB API integration (public API key)
 - User input handling and validation
-- Client-side security measures
+- Client-side security measures (CSP, XSS prevention)
+- LocalStorage usage for watchlist persistence
+- Content Security Policy in index.html
 
 ### Out of Scope
 
@@ -53,6 +54,17 @@ The following are generally considered out of scope:
 - Social engineering attacks
 - Physical security issues
 - Issues requiring physical access to user devices
+- Vulnerabilities in the OMDB API service itself
+
+### Security Architecture
+
+Cinema24 is a client-side application with the following security posture:
+
+- **No authentication**: The app does not handle user accounts or authentication data
+- **Public API**: Uses the OMDB API with a public API key (no sensitive data)
+- **LocalStorage**: Watchlist data is stored locally on the user's device only
+- **Content Security Policy**: Enforced via meta tag in index.html
+- **HTTPS Required**: All API calls and external resources must be served over HTTPS
 
 ### Security Best Practices
 
@@ -63,6 +75,7 @@ When using Cinema24:
 3. Sanitize any user inputs if you modify the application
 4. Follow Angular security best practices
 5. Regularly update to the latest version
+6. Review the Content Security Policy in index.html before deployment
 
 ### Recognition
 

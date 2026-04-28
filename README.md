@@ -1,69 +1,98 @@
 # Cinema24 🎬
 
-A modern Angular movie search application that allows users to discover and explore movies using the OMDB API. Built with Angular 16, Angular Material, and Tailwind CSS for a beautiful and responsive user experience.
+> **v2.0.0** - Full UI/UX modernization, Watchlist, debounced search, type filtering, skeleton loaders, and more.
+
+A professional Angular movie search application powered by the OMDB API. Discover, filter, and save your favourite movies and series with a cinematic dark UI built on Angular 16, Angular Material, and Tailwind CSS.
+
+## ✨ What's New in v2.0.0
+
+- **Watchlist** - Save movies/series to a persistent local watchlist (localStorage), accessible from any page
+- **Debounced search** - `debounceTime` + `distinctUntilChanged` + `switchMap` pipeline eliminates redundant API calls
+- **Type filter** - Filter results by All / Movies / Series directly from the search bar
+- **Category browsing** - Browse curated categories (Trending, Sci-Fi, Action, Drama) without typing
+- **Skeleton loaders** - Animated placeholder cards while results load
+- **Hero section** - Full cinematic homepage hero with gradient headline
+- **Movie detail overhaul** - Blurred backdrop hero, glassmorphism detail card, plot expand, all ratings sources (IMDb, Rotten Tomatoes, Metacritic), genre pills, runtime/language/country meta
+- **Responsive header** - Glassmorphism navbar with active route highlighting, watchlist badge counter, and mobile hamburger drawer
+- **Enhanced footer** - Two-column layout with navigation and external links
+- **Route animations** - Smooth fade+slide transitions between pages
+- **Poster fallback** - Graceful placeholder when OMDB returns no image
+- **Custom scrollbar** - Thin brand-colored scrollbar
+- **Inter font** - Upgraded typography with Inter alongside Roboto
+- **Bug fixes** - Fixed `imbdID` typo in Movie model, fixed `searchExecuted` not resetting on clear, fixed subscription leaks with `takeUntil` + `OnDestroy` across all components
+- **scroll restoration** - Pages scroll to top on navigation
+- **Load More / Pagination** - Fetch additional pages of results beyond the initial 10, appending them to the grid with inline skeleton loaders
 
 ## ✨ Features
 
-- **Movie Search**: Search for movies by title with real-time results
-- **Movie Details**: View detailed information including ratings, cast, director, and awards
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Modern UI**: Beautiful interface with Angular Material components and Tailwind CSS
-- **IMDB Integration**: Direct links to IMDB for more movie information
-- **Error Handling**: Custom 404 page with animated effects
+- **Smart Search** - Debounced live search with type filter (All / Movies / Series)
+- **Category Tabs** - Browse trending, sci-fi, action, and drama without searching
+- **Movie Details** - Full plot, cast, director, awards, genre pills, all rating sources, runtime, language
+- **Watchlist** - Add/remove titles with a bookmark toggle; persisted in `localStorage`
+- **Skeleton Loaders** - Polished loading states on every data fetch
+- **Responsive** - Mobile-first layout, works on all screen sizes
+- **404 Page** - Glitch-effect animated error page with navigation back
+- **IMDB Integration** - Direct links to IMDb title pages
+- **Load More** - Paginated results with "X of Y" counter; fetch as many pages as you like
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: Angular 16
-- **UI Framework**: Angular Material
-- **Styling**: Tailwind CSS
+- **UI Framework**: Angular Material 16
+- **Styling**: Tailwind CSS 3 + custom brand tokens
+- **Typography**: Inter, Roboto
 - **API**: OMDB API
+- **State**: RxJS (`BehaviorSubject`, `switchMap`, `debounceTime`)
+- **Persistence**: `localStorage` via `WatchlistService`
 - **Testing**: Jasmine & Karma
-- **Build Tool**: Angular CLI
+- **Build Tool**: Angular CLI 16
 
 ## 🏁 Getting Started
 
 ### Prerequisites
 
 - Node.js (v16 or higher)
-- npm or yarn
-- Angular CLI
+- npm
+- Angular CLI (`npm i -g @angular/cli`)
 
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/klajdm/Cinema24.git
 cd Cinema24
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables
+
 ```bash
-# The project uses OMDB API key
-# Update src/environments/environment.ts with your API key
+# Update src/environments/environment.prod.ts with your OMDB API key
+# Get a free key at https://www.omdbapi.com/apikey.aspx
 ```
 
 4. Start the development server
+
 ```bash
 ng serve
 ```
 
-5. Open your browser and navigate to `http://localhost:4200`
+5. Open your browser at `http://localhost:4200`
 
 ## 📦 Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
 ```bash
 # Production build
-ng build --prod
+ng build --configuration production
 
-# Development build
-ng build
+# Development build with watch
+npm run watch
 ```
 
 ## 🧪 Testing
@@ -72,7 +101,7 @@ ng build
 # Run unit tests
 ng test
 
-# Run tests with coverage
+# Run with coverage
 ng test --code-coverage
 ```
 
@@ -81,38 +110,27 @@ ng test --code-coverage
 ```
 src/
 ├── app/
-│   ├── models/           # Data models
-│   ├── pages/            # Page components
-│   │   ├── home/         # Home page with search
-│   │   ├── movie/        # Movie details page
-│   │   └── error404/     # 404 error page
-│   ├── services/         # API services
-│   ├── shared/           # Shared components
-│   │   └── layout/       # Header and footer
-│   └── app.module.ts     # Main app module
-├── assets/               # Static assets
-├── environments/         # Environment configurations
-└── styles.css           # Global styles
+│   ├── models/
+│   │   └── movie.model.ts        # Movie interface (all fields)
+│   ├── pages/
+│   │   ├── home/                 # Hero, debounced search, category tabs, grid
+│   │   ├── movie/                # Detail page with backdrop hero
+│   │   ├── watchlist/            # Saved titles page
+│   │   └── error404/             # Glitch-effect 404
+│   ├── services/
+│   │   ├── movie.service.ts      # OMDB API (search + detail)
+│   │   └── watchlist.service.ts  # localStorage watchlist
+│   ├── shared/
+│   │   └── layout/
+│   │       ├── header/           # Glassmorphism nav + mobile menu
+│   │       └── footer/           # Two-column footer
+│   ├── app-routing.module.ts
+│   ├── app.module.ts
+│   └── app.component.ts          # Route animations
+├── assets/
+├── environments/
+└── styles.css                    # Global styles, scrollbar, focus rings
 ```
-
-## 🎨 Features in Detail
-
-### Movie Search
-- Real-time search functionality
-- Configurable result limits (3 or 10 results)
-- Loading states and error handling
-
-### Movie Details
-- Comprehensive movie information
-- Star ratings display
-- Direct IMDB integration
-- Responsive layout for all screen sizes
-
-### User Interface
-- Dark theme with purple accents
-- Smooth animations and transitions
-- Material Design components
-- Mobile-first responsive design
 
 ## 🤝 Contributing
 
@@ -129,7 +147,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Klajdi Murataj**
-- GitHub: [@klajdm](https://github.com/klajdm)
 
+- GitHub: [@klajdm](https://github.com/klajdm)
+- Portfolio: [klajdimurataj.dev](https://klajdimurataj.dev/)
+
+## 🙏 Acknowledgments
+
+- [OMDB API](http://www.omdbapi.com/) for providing movie data
+- [Angular](https://angular.io/) for the framework
+- [Angular Material](https://material.angular.io/) for UI components
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+- [Inter](https://rsms.me/inter/) for the typeface
+
+---
 
 If you like this project, please consider giving it a ⭐ on GitHub!

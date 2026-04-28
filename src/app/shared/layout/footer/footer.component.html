@@ -1,13 +1,93 @@
-<footer>
-  <div
-    class="relative bg-[#2f2c35] w-full h-12 flex justify-center items-center text-sm text-white space-x-2"
-  >
-    <a class="hover:underline" href="/home"
-      >Cinema24 &copy;</a
-    > 
-    <span class=> {{ today | date : "yyyy" }}. </span>
-    <span>|</span>
-    <span>Made by <a href="https://klajdimurataj.vercel.app/" target="_blank" class="hover:underline"> Klajdi Murataj</a></span>
-    
+<footer class="border-t border-white/5 bg-cinema-footer mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <!-- Brand -->
+      <div class="max-w-xs">
+        <a routerLink="/home" class="inline-block mb-3">
+          <img
+            src="./../../../../assets/Cinema24logo.png"
+            alt="Cinema24"
+            class="w-[120px] opacity-90 hover:opacity-100 transition-opacity"
+          />
+        </a>
+        <p class="text-cinema-purple-dim/50 text-sm leading-relaxed">
+          Discover, explore, and save your favourite movies and series - powered
+          by the OMDB API.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="flex gap-12">
+        <div>
+          <h4
+            class="text-white text-xs font-semibold uppercase tracking-wider mb-3"
+          >
+            Navigate
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                routerLink="/home"
+                class="text-cinema-purple-dim/60 hover:text-white text-sm transition-colors duration-200"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                routerLink="/watchlist"
+                class="text-cinema-purple-dim/60 hover:text-white text-sm transition-colors duration-200"
+                >Watchlist</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-white text-xs font-semibold uppercase tracking-wider mb-3"
+          >
+            External
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="https://github.com/klajdm/Cinema24"
+                target="_blank"
+                rel="noopener"
+                class="text-cinema-purple-dim/60 hover:text-white text-sm transition-colors duration-200"
+                >GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.imdb.com"
+                target="_blank"
+                rel="noopener"
+                class="text-cinema-purple-dim/60 hover:text-white text-sm transition-colors duration-200"
+                >IMDb</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-2"
+    >
+      <p class="text-cinema-purple-dim/40 text-xs">
+        &copy; {{ today | date: "yyyy" }} Cinema24. All rights reserved.
+      </p>
+      <p class="text-cinema-purple-dim/40 text-xs">
+        Made by
+        <a
+          href="https://klajdimurataj.dev/"
+          target="_blank"
+          rel="noopener"
+          class="text-cinema-purple-dim/70 hover:text-white transition-colors duration-200"
+          >Klajdi Murataj</a
+        >
+      </p>
+    </div>
   </div>
 </footer>
