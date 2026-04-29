@@ -35,6 +35,14 @@ A professional Angular movie search application powered by the OMDB API. Discove
 - **IMDB Integration** - Direct links to IMDb title pages
 - **Load More** - Paginated results with "X of Y" counter; fetch as many pages as you like
 
+## 📸 Screenshots
+
+![Screenshot 1](src/assets/screenshot/Screenshot_1.png)
+
+![Screenshot 2](src/assets/screenshot/Screenshot_2.png)
+
+![Screenshot 3](src/assets/screenshot/Screenshot_3.png)
+
 ## 🛠️ Tech Stack
 
 - **Frontend**: Angular 16
