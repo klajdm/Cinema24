@@ -1,5 +1,7 @@
 # Cinema24 🎬
 
+![Screenshot 1](src/assets/screenshot/Screenshot_1.png)
+
 > **v2.0.0** - Full UI/UX modernization, Watchlist, debounced search, type filtering, skeleton loaders, and more.
 
 A professional Angular movie search application powered by the OMDB API. Discover, filter, and save your favourite movies and series with a cinematic dark UI built on Angular 16, Angular Material, and Tailwind CSS.
@@ -36,8 +38,6 @@ A professional Angular movie search application powered by the OMDB API. Discove
 - **Load More** - Paginated results with "X of Y" counter; fetch as many pages as you like
 
 ## 📸 Screenshots
-
-![Screenshot 1](src/assets/screenshot/Screenshot_1.png)
 
 ![Screenshot 2](src/assets/screenshot/Screenshot_2.png)
 
