@@ -2,8 +2,6 @@
 
 ![Screenshot 1](src/assets/screenshot/Screenshot_1.png)
 
-> **v2.0.0** - Full UI/UX modernization, Watchlist, debounced search, type filtering, skeleton loaders, and more.
-
 A professional Angular movie search application powered by the OMDB API. Discover, filter, and save your favourite movies and series with a cinematic dark UI built on Angular 16, Angular Material, and Tailwind CSS.
 
 ## ✨ What's New in v2.0.0
@@ -158,14 +156,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - GitHub: [@klajdm](https://github.com/klajdm)
 - Portfolio: [klajdimurataj.dev](https://klajdimurataj.dev/)
-
-## 🙏 Acknowledgments
-
-- [OMDB API](http://www.omdbapi.com/) for providing movie data
-- [Angular](https://angular.io/) for the framework
-- [Angular Material](https://material.angular.io/) for UI components
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
-- [Inter](https://rsms.me/inter/) for the typeface
 
 ---
 
